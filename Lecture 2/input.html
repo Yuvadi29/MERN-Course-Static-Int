@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <input type="text" id="userInput" placeholder="Type something" />
+    <button onclick="showInput()">Submit</button>
+
+    <p id="output"></p>
+
+    <script>
+        function showInput() {
+            let input = document.getElementById("userInput").value;
+            document.getElementById("output").innerText = input;
+        }
+    </script>
+</body>
+
+</html>
