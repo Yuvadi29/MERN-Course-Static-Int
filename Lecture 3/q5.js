@@ -1,0 +1,6 @@
+/*
+  Alphabetical pattern where the rows and columns are same
+    A B C
+    A B C
+    A B C
+*/
