@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interval Control</title>
+  </head>
+  <body>
+    <button id="start">START</button>
+    <button id="stopx">STOP</button>
+
+    <script>
+      let intervalId;
+
+      document.getElementById("start").addEventListener("click", () => {
+        intervalId = setInterval(() => {
+          console.log(new Date().toLocaleTimeString());
+        }, 1000);
+
+        document.getElementById("stop").addEventListener("click", () => {
+          clearInterval(intervalId);
+        });
+      });
+    </script>
+  </body>
+</html>
