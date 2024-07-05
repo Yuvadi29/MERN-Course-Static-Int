@@ -8,18 +8,18 @@
 //     mycallBack(sum);
 // }
 
-// myCalculator(5, 5, myDisplay);
+// myCalculator(5, 8, myDisplay);
 
 // Callback with Array
-// function forEachElement(arr, callback) {
-//     for (let i = 0; i < arr.length; i++) {
-//         callback(arr[i], i);
-//     }
-// }
+function forEachElement(arr, callback) {
+    for (let i = 0; i < arr.length; i++) {
+        callback(arr[i], i);
+    }
+}
 
-// forEachElement([1, 2, 3], (element, index) => {
-//     console.log(`Element ${index}: ${element * 2}`);
-// });
+forEachElement([1, 2, 3], (element, index) => {
+    console.log(`Element ${index}: ${element * 2}`);
+});
 
 // Create an array. Call a removeNeg function with a callback and display the result.
 const numbers = [4, 1, -20, -7, 5, 9, -6];
