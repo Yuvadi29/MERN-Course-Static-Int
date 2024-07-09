@@ -1,15 +1,33 @@
 import React from 'react'
 
 const App = () => {
+  const x = 5;
+  let text = 'Goodbye';
+  if (x < 10) {
+    text = 'Hello';
+  }
+
+  const myElement = <h1>{text}</h1>
+  
   return (
     <> {/*JSX Fragment <></> */}
       <div>
         <h1>App</h1>
         <h2>Hey</h2>
+        <h3>{myElement}</h3>
       </div>
 
       <div>
-        <h3>Hello World</h3>
+        {/* Expressions */}
+        <h3>Addition of 5 and 5 is {5 + 5}</h3>
+        {/* Self Closing Tag */}
+        <input />
+        <textarea />
+        <img src='https://i.ytimg.com/vi/LhzkG0COLr0/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDqSEApwkv8u4KmRT91QDjbnBIDbg' />
+
+        <iframe src='https://www.youtube.com/watch?v=btQO6bPkrXE' height={200} width={200} />
+
+
       </div>
     </>
   )
