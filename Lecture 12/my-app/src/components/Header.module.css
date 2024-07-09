@@ -1,0 +1,6 @@
+/* CSS inside a module is available only for the component that importerd it */
+.bigBlue{
+    color:dodgerblue;
+    padding: 40px;
+    text-align: center;
+}
