@@ -1,5 +1,7 @@
 import React from 'react'
 import Header from './components/Header';
+import Car from './components/Car';
+import Mobile from './components/Mobile';
 // import './App.css';
 
 const App = () => {
@@ -10,10 +12,18 @@ const App = () => {
   }
 
   const myElement = <h1>{text}</h1>
-  
+
   return (
     <> {/*JSX Fragment <></> */}
       <div>
+        <Car brand="Ford" model="Fiesta" />
+        <Mobile
+          brand="Apple"
+          price="75000"
+          rating="4.5"
+          color="white"
+          location="Virar"
+        />
         <h1>App</h1>
         <h2>Hey</h2>
         <h3>{myElement}</h3>
