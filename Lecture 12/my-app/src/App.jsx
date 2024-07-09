@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from './components/Header';
 
 const App = () => {
   const x = 5;
@@ -15,6 +16,7 @@ const App = () => {
         <h1>App</h1>
         <h2>Hey</h2>
         <h3>{myElement}</h3>
+        <Header />
       </div>
 
       <div>
