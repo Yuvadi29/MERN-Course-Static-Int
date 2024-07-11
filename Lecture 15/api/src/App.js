@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import loader from './assets/loader.svg'
 import Youtube from './components/Youtube';
+import Query from './components/Query';
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -40,7 +41,8 @@ const App = () => {
           {user.name}
         </li>
       ))}; */}
-      <Youtube />
+      {/* <Youtube /> */}
+      <Query />
     </div>
   )
 }
