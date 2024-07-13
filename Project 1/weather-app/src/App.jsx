@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const App = () => {
+  const [input, setInput] = useState("");
+  const [weatherData, setWeatherData] = useState();
+  const [submitted, setSubmitted] = useState(false);
 
   const API_KEY = '1b242efea8e02a5806fe42998e221101';
 
-  const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'
+  const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${API_KEY}`;
 
-  // Assuming these are dynamic data placeholders
-  const coordinates = {
-    latitude: '40.7128',
-    longitude: '-74.0060'
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const fetch = await axios.get(BASE_URL);
+      console.log(fetch.data);
+      setWeatherData(fetch.data);
+      setSubmitted(true);
+    } catch (error) {
+      console.log("Error Fetching Data: ", error);
+    }
   };
-  const temperature = '25°C';
-  const pressure = '1013 hPa';
-  const humidity = '50%';
-  const windSpeed = '10 km/h';
-  const sunrise = '5:30 AM';
-  const sunset = '7:00 PM';
+
+  const formatTime = (time) => {
+    const date = new Date(time * 1000);
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric'
+    };
+    return date.toLocaleTimeString([], options);
+  };
+
 
   return (
     // <>
@@ -29,30 +46,40 @@ const App = () => {
           type="text"
           className="flex-1 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
           placeholder="Enter City Name"
+          onChange={(e) => setInput(e.target.value)}
         />
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => fetchData()}
+        >
           Submit
         </button>
       </div>
 
       {/* Weather Details Card */}
-      <div className="p-4">
-        <div className="text-gray-800 font-bold text-xl mb-2">Weather Details</div>
+      {submitted ? (
+        weatherData && (
+          <div className="p-4">
+            <div className="text-gray-800 font-bold text-xl mb-2">Weather Details</div> 
 
-        <div className="border border-gray-300 p-4 rounded-lg bg-white">
-          <p className="mb-4"><span className="font-bold">Coordinates:</span> Latitude={coordinates.latitude}, Longitude={coordinates.longitude}</p>
-          <p className="mb-2"><span className="font-bold">Temperature:</span> {temperature}</p>
-          <p className="mb-2"><span className="font-bold">Pressure:</span> {pressure}</p>
-          <p className="mb-2"><span className="font-bold">Humidity:</span> {humidity}</p>
+            <div className="border border-gray-300 p-4 rounded-lg bg-white">
+              <p className="mb-4"><span className="font-bold">Coordinates:</span> Latitude={weatherData?.coord?.lat}, Longitude={weatherData?.coord?.lon}</p>
+              <p className="mb-2"><span className="font-bold">Temperature:</span> {Math.round(weatherData?.main?.temp - 273)} °C</p>
+              <p className="mb-2"><span className="font-bold">Pressure:</span> {weatherData?.main?.pressure} Pa</p>
+              <p className="mb-2"><span className="font-bold">Humidity:</span> {weatherData?.main?.humidity} %</p>
 
-          <div className="flex justify-between">
-            <p className="mb-2"><span className="font-bold">Wind Speed:</span> {windSpeed}</p>
-            <p className="mb-2"><span className="font-bold">Sunrise:</span> {sunrise}</p>
-            <p className="mb-2"><span className="font-bold">Sunset:</span> {sunset}</p>
+              <div className="flex justify-between">
+                <p className="mb-2"><span className="font-bold">Wind Speed:</span> {weatherData?.wind?.speed} km/h</p>
+                <p className="mb-2"><span className="font-bold">Sunrise:</span> {formatTime(weatherData?.sys?.sunrise)}</p>
+                <p className="mb-2"><span className="font-bold">Sunset:</span> {formatTime(weatherData?.sys?.sunset)}</p>
+
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        )
+      ) : null}
     </div>
+    // {<h1>Hi</h1>}
   )
 }
 
